@@ -1,0 +1,117 @@
+---
+title: "R programming"
+author: "me"
+date: "05/01/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Run RMarkdown on PDF format
+
+We have to download de Texlive program
+
+## Class 1 - video: Writing code/setting your working directory
+
+
+```{r}
+getwd()
+```
+
+Exercise: 6
+ x <- c(1,3, 5) and y <- c(3, 2, 10), what is produced by the expression rbind(x, y)
+ 
+```{r}
+x = c(1,3,5)
+y= c(3,2,10)
+
+rbind(x,y)
+```
+ 
+ Exercise 8.
+
+Suppose I have a list defined as x <- list(2, "a", "b", TRUE). What does x[[1]] give me? Select all that apply.
+```{r}
+ x <- list(2, "a", "b", TRUE)
+ x[[1]]
+
+```
+
+Exercise 9: 
+Suppose I have a vector x <- 1:4 and y <- 2:3. What is produced by the expression x + y?
+
+```{r}
+x <- 1:4
+y <- 2:3.
+x+y
+```
+
+
+Exercise 10
+Suppose I have a vector x <- c(3, 5, 1, 10, 12, 6) and I want to set all elements of this vector that are less than 6 to be equal to zero. What R code achieves this? Select all that apply.
+
+```{r}
+x <- c(3, 5, 1, 10, 12, 6) 
+
+
+# x[x < 6] == 0 funãço lógica
+x[x < 6] <- 0
+x[x <= 5] <- 0
+x[x %in% 1:5] <- 0
+x
+```
+### Importando os dados
+```{r}
+hw1_data <- read.csv("~/Documentos/datasciencecoursera/hw1_data.csv")
+
+#print the first two lines of data
+
+head(hw1_data, n=2)
+
+#print the last two lines of data
+tail(hw1_data, n=2)
+
+#print ozone in 47th row
+print(hw1_data$Ozone[[47]]) 
+
+# missing values ozone variable
+test =is.na(hw1_data$Ozone) 
+
+a.test = complete.cases(hw1_data$Ozone)   ## remove NA da variável Ozone
+c = hw1_data[a.test,]
+mean = mean(c$Ozone)
+
+#What is the mean of the "Ozone" column in this dataset? Exclude missing values (coded as NA) from this calculation.
+## Easy way
+mean(dataset[, "Ozone"], na.rm = TRUE)
+
+
+miss <- is.na(dataset[, "Ozone"])  ## A vector of TRUE/FALSE
+sum(miss)
+
+x = subset(hw1_data, Ozone>31 & Temp>90)
+mean(x$Solar.R)
+
+y=subset(hw1_data, hw1_data$Month==6)
+mean(y$Temp)
+
+z = subset(hw1_data, hw1_data$Month==5)
+z1=na.omit(z)
+max(z1$Ozone)
+```
+
+
+### Subsetting nested elements of a list
+
+```{r}
+k = list(a=list(10,11,12), b=c(3.14, 2.81))
+
+# resultados equivalentes
+k[[c(1, 3)]]  #no elemento 1, print elem 3
+k[[1]][[3]]
+k[[c(2,1)]]
+
+```
+
+
+
